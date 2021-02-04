@@ -63,7 +63,7 @@ def create_model(input_dim,output_dim):
     learning_rate = 0.001
 
     input_layer = Input(shape=input_dim)
-    hidden_layer = Dense(18, activation='relu')(input_layer)
+    hidden_layer = Dense(32, activation='relu')(input_layer)
     hidden_layer = Dense(18, activation='relu')(hidden_layer)
     output_layer = Dense(output_dim, activation='linear')(hidden_layer)
 
