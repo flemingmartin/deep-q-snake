@@ -69,14 +69,13 @@ class SnakeEnv:
 
 		return state, reward, done
 
-	def render(self):
+	def render(self, save_img=False):
 		img = self.get_image()
 		img = cv2.resize(np.array(img), (const.SCREEN_PLOT_SIZE,const.SCREEN_PLOT_SIZE), interpolation = cv2.INTER_AREA)
 		cv2.imshow("image", np.array(img))
 		cv2.waitKey(1)
-		#if save_path != None:
-			#pepe = cv2.imwrite(save_path, img) 
-			#print('pepe')
+		if save_img:
+			return img
 
 	
 	def get_image(self):
