@@ -1,3 +1,28 @@
+'''
+El environment es un entorno de simulación que ejecuta acciones en función de
+un input recibido, y para cada acción actualiza su estado y devuelve un reward
+Para hacer esto posible, el environment debe tener 3 funcionalidades principales:
+	-Reset: inicializa el sistema y devuelve el estado inicial
+	-Step: actualiza el estado en función de la accion recibida y devuelve el
+	nuevo estado y una recompenza por la acción realizada (esta puede ser
+	positiva o negativa)
+	-Render: muestra de forma gráfica el estado del sistema
+
+Dicho esto, este environment simula el juego Snake, donde el jugador debe ir
+agarrando las comidas que aparecen de manera aleatoria y el cuerpo de la 
+serpiente irá creciendo. De la misma manera, el jugador puede morir chocando 
+contra una pared (fin de la pantalla) o contra su cuerpo. El jugador recibe 
+una recompenza de 5 en caso de alcanzar una comida y una recompenza de -5 en 
+caso de morir, en caso contrario la recompenza es 0
+
+La codificación del estado consta de 20 valores. Los 8 primeros representan
+la distancia a un obstáculo (sea pared o cuerpo) en 8 direcciones. Las
+siguientes 4 representan la distancia a la comida en 4 direcciones. Luego se
+codifica en one-hot la direccion de la cabeza de la serpiente y la dirección
+de la cola, formando así los últimos 8 valores
+'''
+
+
 from PIL import Image
 import cv2
 import numpy as np
@@ -29,11 +54,8 @@ class SnakeEnv:
 
 		state = self.calculate_state()
 		done = False
+		reward = 0
 
-		if self.calculate_food_direction()[self.snake.direction-1] == 1:
-			reward = const.FOOD_DIRECTION_REWARD
-		else:
-			reward = const.RANDOM_MOVEMENT_REWARD
 		if live == False:
 			done = True
 			reward = const.LOSS_REWARD
@@ -113,9 +135,9 @@ class SnakeEnv:
 						  distance_to_obstacle[5]/self.size,
 						  distance_to_obstacle[6]/self.size,
 						  distance_to_obstacle[7]/self.size,
-						  food_directions[0], #aca hay un error pero no pasa nada
-						  food_directions[1], #la red aprende asi y listo
-						  food_directions[2], #la direccion arriba y abajo estan invertidas
+						  food_directions[0],
+						  food_directions[1], 
+						  food_directions[2], 
 						  food_directions[3],
 						  snake_direction[0],
 						  snake_direction[1],
