@@ -23,7 +23,7 @@ El modelo utilizado es muy simple, y se puede ver en la siguiente imágen
 Llegados a este punto, a medida que pasan las iteraciones, el modelo no presenta grandes mejoras, esto se puede ver claramente en el siguiente gráfico
 
 <p align="center">
-  <img width="680" height="480" src="/Images/agerage_scores.jpg">
+  <img width="680" height="480" src="/Images/average_score.png">
 </p>
 
 ## Testing
